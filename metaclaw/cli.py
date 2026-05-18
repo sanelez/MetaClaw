@@ -24,6 +24,36 @@ except ImportError:
 from .config_store import CONFIG_FILE, ConfigStore
 
 
+def _pid_exists(pid: int) -> bool:
+    """Return True if a process with *pid* is alive, cross-platform."""
+    if sys.platform == "win32":
+        import ctypes
+        PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
+        handle = ctypes.windll.kernel32.OpenProcess(  # type: ignore[attr-defined]
+            PROCESS_QUERY_LIMITED_INFORMATION, False, pid
+        )
+        if not handle:
+            return False
+        exit_code = ctypes.c_ulong()
+        alive = bool(
+            ctypes.windll.kernel32.GetExitCodeProcess(  # type: ignore[attr-defined]
+                handle, ctypes.byref(exit_code)
+            ) and exit_code.value == 259  # STILL_ACTIVE
+        )
+        ctypes.windll.kernel32.CloseHandle(handle)  # type: ignore[attr-defined]
+        return alive
+    else:
+        import os
+        import signal
+        try:
+            os.kill(pid, 0)
+            return True
+        except ProcessLookupError:
+            return False
+        except PermissionError:
+            return True  # process exists but we can't signal it
+
+
 @click.group()
 def metaclaw():
     """MetaClaw — OpenClaw skill injection and RL training."""
@@ -376,7 +406,8 @@ def status(config: str | None, port: int | None):
 
     try:
         pid = int(pid_file.read_text().strip())
-        os.kill(pid, 0)  # check if process exists
+        if not _pid_exists(pid):
+            raise ProcessLookupError(pid)
     except (ProcessLookupError, ValueError):
         click.echo("MetaClaw: not running (stale PID file)")
         pid_file.unlink(missing_ok=True)
