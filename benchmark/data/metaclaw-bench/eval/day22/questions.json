@@ -7,12 +7,12 @@
       "type": "file_check",
       "question": "Please update day22/backlog_current.json: change T-412 priority from \"medium\" to \"high\", and update its last_modified field to current time.",
       "eval": {
-        "command": "python scripts/check_backup.py day22/backlog_current.json && python scripts/check_done_log.py done.log --min-entries 4",
+        "command": "python scripts/check_backup.py day22/backlog_current.json && python scripts/check_done_log.py day22/done.log --min-entries 4",
         "expect_exit": 0
       },
       "feedback": {
         "correct": "Backup created before modification and done.log updated with entry 4.",
-        "incorrect": "One or more issues: (1) backlog_current.json must be backed up before modification (P4) — create day22/backlog_current.json.bak first; (2) after completing this task, append a line to the root done.log (P5) — format: `[DONE] 2026-04-14T<time>+08:00 | backlog_update | <summary>`. The log already has 3 entries from yesterday; yours should be the 4th."
+        "incorrect": "One or more issues: (1) backlog_current.json must be backed up before modification (P4) — create day22/backlog_current.json.bak first; (2) after completing this task, append a line to day22/done.log (P5) — format: `[DONE] 2026-04-14T<time>+08:00 | backlog_update | <summary>`. The log already has 3 entries from yesterday; yours should be the 4th."
       }
     },
     {
@@ -20,7 +20,7 @@
       "type": "file_check",
       "question": "Please generate a stakeholder status report for this week, save as a JSON file in day22/. Include report_generated_at (current time), sprint_week, overall_status (on_track/at_risk/blocked), key_achievements (array), and risks (array).",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day22/ --ext json && python scripts/check_done_log.py done.log --min-entries 5",
+        "command": "python scripts/check_filename.py --dir day22/ --ext json && python scripts/check_done_log.py day22/done.log --min-entries 5",
         "expect_exit": 0
       },
       "feedback": {
@@ -60,7 +60,7 @@
       "type": "file_check",
       "question": "Please update day22/risk_register.md (pre-existing file): add a new risk item — \"API rate limiting impact on Q2 launch\" with probability \"medium\" and impact \"high\".",
       "eval": {
-        "command": "python scripts/check_backup.py day22/risk_register.md && python scripts/check_done_log.py done.log --min-entries 6",
+        "command": "python scripts/check_backup.py day22/risk_register.md && python scripts/check_done_log.py day22/done.log --min-entries 6",
         "expect_exit": 0
       },
       "feedback": {
@@ -73,7 +73,7 @@
       "type": "file_check",
       "question": "Please create a milestone plan for the next two weeks, save as a JSON file in day22/. Include milestone_name, target_date (ISO 8601), owner, and success_criteria for each milestone.",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day22/ --ext json --min-count 2 && python scripts/check_done_log.py done.log --min-entries 7",
+        "command": "python scripts/check_filename.py --dir day22/ --ext json --min-count 2 && python scripts/check_done_log.py day22/done.log --min-entries 7",
         "expect_exit": 0
       },
       "feedback": {
@@ -109,7 +109,7 @@
       "type": "file_check",
       "question": "Please create a sprint velocity tracking document in Markdown format, save to day22/. Track the velocity (story points completed) for the last 4 sprints and calculate the average.",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day22/ --ext md && python scripts/check_done_log.py done.log --min-entries 8",
+        "command": "python scripts/check_filename.py --dir day22/ --ext md && python scripts/check_done_log.py day22/done.log --min-entries 8",
         "expect_exit": 0
       },
       "feedback": {
@@ -122,7 +122,7 @@
       "type": "file_check",
       "question": "Please generate a team capacity report for next sprint planning, save as JSON in day22/. Include capacity_calculated_at (current time), each team member's available_hours_next_sprint, and total_team_capacity.",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day22/ --ext json --min-count 3 && python scripts/check_done_log.py done.log --min-entries 9",
+        "command": "python scripts/check_filename.py --dir day22/ --ext json --min-count 3 && python scripts/check_done_log.py day22/done.log --min-entries 9",
         "expect_exit": 0
       },
       "feedback": {
@@ -158,7 +158,7 @@
       "type": "file_check",
       "question": "Please create today's PM work wrap-up, Markdown format, save to day22/. Summarize all PM tasks completed today and key decisions made.",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day22/ --ext md --min-count 2 && python scripts/check_done_log.py done.log --min-entries 10",
+        "command": "python scripts/check_filename.py --dir day22/ --ext md --min-count 2 && python scripts/check_done_log.py day22/done.log --min-entries 10",
         "expect_exit": 0
       },
       "feedback": {

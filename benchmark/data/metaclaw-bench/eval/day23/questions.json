@@ -7,7 +7,7 @@
       "type": "file_check",
       "question": "Please analyze the Q1 API metrics data (you can use reasonable estimated values) and create a Q1 final metrics summary report, JSON format, save to day23/. Include analysis_period_start (2026-01-01T00:00:00+08:00), analysis_period_end (2026-03-31T23:59:59+08:00), generated_at (current time), and key_metrics object with avg_response_ms, error_rate_pct, uptime_pct.",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day23/ --ext json && python scripts/check_done_log.py done.log --task-prefix q1",
+        "command": "python scripts/check_filename.py --dir day23/ --ext json && python scripts/check_done_log.py day23/done.log --task-prefix q1",
         "expect_exit": 0
       },
       "feedback": {
@@ -20,7 +20,7 @@
       "type": "file_check",
       "question": "Please generate an error trend analysis for the past 30 days, save as a JSON file in day23/. Include generated_at (current time), trend_period_start (2026-03-16T00:00:00+08:00), trend_period_end (current time), daily_error_rates (array of {date, error_rate_pct} objects).",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day23/ --ext json --min-count 2 && python scripts/check_done_log.py done.log --min-entries 12",
+        "command": "python scripts/check_filename.py --dir day23/ --ext json --min-count 2 && python scripts/check_done_log.py day23/done.log --min-entries 12",
         "expect_exit": 0
       },
       "feedback": {
@@ -60,7 +60,7 @@
       "type": "file_check",
       "question": "Please update day23/slo_tracker.json: add this week's SLO compliance data — availability_pct: 99.7, error_budget_remaining_pct: 42.3, last_updated: current time (ISO 8601).",
       "eval": {
-        "command": "python scripts/check_backup.py day23/slo_tracker.json && python scripts/check_done_log.py done.log --task-prefix slo",
+        "command": "python scripts/check_backup.py day23/slo_tracker.json && python scripts/check_done_log.py day23/done.log --task-prefix slo",
         "expect_exit": 0
       },
       "feedback": {
@@ -73,7 +73,7 @@
       "type": "file_check",
       "question": "Please create a weekly API health summary report, Markdown format, save to day23/. Include sections for availability, error rates, response times, and notable incidents.",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day23/ --ext md && python scripts/check_done_log.py done.log --task-prefix api_health",
+        "command": "python scripts/check_filename.py --dir day23/ --ext md && python scripts/check_done_log.py day23/done.log --task-prefix api_health",
         "expect_exit": 0
       },
       "feedback": {
@@ -113,7 +113,7 @@
       "type": "file_check",
       "question": "Please create a data quality audit report for today's processed datasets, JSON format, save to day23/. Include audit_completed_at (current time), datasets_audited (array with name and quality_score), overall_quality_grade (A/B/C/D).",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day23/ --ext json --min-count 3 && python scripts/check_done_log.py done.log --task-prefix data_quality",
+        "command": "python scripts/check_filename.py --dir day23/ --ext json --min-count 3 && python scripts/check_done_log.py day23/done.log --task-prefix data_quality",
         "expect_exit": 0
       },
       "feedback": {
@@ -126,7 +126,7 @@
       "type": "file_check",
       "question": "Please create an incident timeline document for the minor outage that occurred last week (use April 8, 14:00-14:45 CST as the time window), JSON format, save to day23/. Include incident_start (ISO 8601), incident_end (ISO 8601), detection_time, resolution_time, and events (array of timestamped actions).",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day23/ --ext json --min-count 4 && python scripts/check_done_log.py done.log --task-prefix incident",
+        "command": "python scripts/check_filename.py --dir day23/ --ext json --min-count 4 && python scripts/check_done_log.py day23/done.log --task-prefix incident",
         "expect_exit": 0
       },
       "feedback": {
@@ -166,7 +166,7 @@
       "type": "file_check",
       "question": "Please create a performance comparison between this week and last week, save as a JSON file in day23/. Include comparison_generated_at (current time), this_week_avg_ms, last_week_avg_ms, improvement_pct, and verdict (improved/degraded/stable).",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day23/ --ext json --min-count 5 && python scripts/check_done_log.py done.log --task-prefix perf",
+        "command": "python scripts/check_filename.py --dir day23/ --ext json --min-count 5 && python scripts/check_done_log.py day23/done.log --task-prefix perf",
         "expect_exit": 0
       },
       "feedback": {
@@ -179,7 +179,7 @@
       "type": "file_check",
       "question": "Please create a Markdown summary of all data analysis work completed today, save to day23/. Include key findings from each analysis and recommended actions.",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day23/ --ext md --min-count 2 && python scripts/check_done_log.py done.log --task-prefix data_summary",
+        "command": "python scripts/check_filename.py --dir day23/ --ext md --min-count 2 && python scripts/check_done_log.py day23/done.log --task-prefix data_summary",
         "expect_exit": 0
       },
       "feedback": {

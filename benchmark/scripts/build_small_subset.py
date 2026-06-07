@@ -272,9 +272,16 @@ def adjust_min_count(eval_cmd: str, file_check_count: int) -> str:
     eval_cmd = re.sub(r"\s+--min-count\s+\d+", "", eval_cmd)
     # Add new --min-count if > 1
     if file_check_count > 1:
-        # Insert before any trailing quote or end
-        eval_cmd = eval_cmd.rstrip()
-        eval_cmd += f" --min-count {file_check_count}"
+        # Insert the flag immediately after the check_filename.py --ext argument
+        # (NOT at the end of the whole command — the command may be compound, e.g.
+        # "check_filename.py ... && check_done_log.py ...", and appending would
+        # mis-attach --min-count to check_done_log.py, which rejects it).
+        eval_cmd = re.sub(
+            r"(check_filename\.py\b[^&]*?--ext\s+\S+)",
+            rf"\1 --min-count {file_check_count}",
+            eval_cmd,
+            count=1,
+        )
     return eval_cmd
 
 

@@ -65,7 +65,7 @@
       "type": "file_check",
       "question": "Please create a data quality audit report for today's processed datasets, JSON format, save to day10/. Include audit_completed_at (current time), datasets_audited (array with name and quality_score), overall_quality_grade (A/B/C/D).",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day10/ --ext json && python scripts/check_done_log.py done.log --task-prefix data_quality --min-count 2",
+        "command": "python scripts/check_filename.py --dir day10/ --ext json --min-count 2 && python scripts/check_done_log.py done.log --task-prefix data_quality",
         "expect_exit": 0
       },
       "feedback": {

@@ -65,7 +65,7 @@
       "type": "file_check",
       "question": "Please write an integration guide for Orion API v2.3.0 in Markdown format and save it to the day09/ directory. Include the authentication flow, usage examples for key endpoints, and error handling recommendations.",
       "eval": {
-        "command": "python scripts/check_filename.py --dir day09/ --ext md && python scripts/check_done_log.py done.log --min-entries 3 --min-count 2",
+        "command": "python scripts/check_filename.py --dir day09/ --ext md --min-count 2 && python scripts/check_done_log.py done.log --min-entries 3",
         "expect_exit": 0
       },
       "feedback": {
